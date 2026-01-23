@@ -3,6 +3,10 @@ from .models import Authors
 
 
 class AuthorSerializers(serializers.ModelSerializer):
+    image = serializers.ImageField(required=False, allow_null=True)
+
     class Meta:
         model = Authors
-        fields = ('id', 'full_name', "bio", "image")
+        fields = ('full_name', "bio", "image")
+
+
