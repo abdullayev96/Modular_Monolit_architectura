@@ -4,6 +4,8 @@ from .serializers import AuthorSerializers
 from .services import create_author_logic
 from rest_framework.parsers import MultiPartParser, FormParser
 
+from drf_spectacular.utils import extend_schema
+
 # class AuthorAPI(CreateAPIView):
 #     queryset = Authors.objects.all()
 #     serializer_class = AuthorSerializers
@@ -12,8 +14,12 @@ from rest_framework.parsers import MultiPartParser, FormParser
 class AuthorAPI(CreateAPIView):
     queryset = Authors.objects.all()
     serializer_class = AuthorSerializers
-
     parser_classes = (MultiPartParser, FormParser)
+
+    @extend_schema(operation_id="upload_author_image")  # Swagger-ni majburlash
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)
+
 
     def perform_create(self, serializer):
         validated_data = serializer.validated_data
@@ -23,3 +29,4 @@ class AuthorAPI(CreateAPIView):
             bio=validated_data.get('bio'),
             image=validated_data.get('image')
         )
+

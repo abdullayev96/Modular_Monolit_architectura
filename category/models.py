@@ -1,7 +1,8 @@
 from django.db import models
+from baseapp.models import BaseModel
 
 
-class Category(models.Model):
+class Category(BaseModel):
     name = models.CharField(max_length=200, verbose_name="Kategoriya nomi:")
     slug = models.SlugField()
 

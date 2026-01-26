@@ -16,6 +16,7 @@ def get_author_data_by_id(author_id):
     except Authors.DoesNotExist:
         return None
 
+
 def get_authors_by_ids(author_ids):
     authors = Authors.objects.filter(id__in=author_ids)
     return {a.id: a.full_name for a in authors}

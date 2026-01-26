@@ -1,9 +1,9 @@
 from .models import Book
 from author.services import get_authors_by_ids
-from category.services import  get_categories_by_ids
+from category.services import get_categories_by_ids
 
 
-def create_book_logic(name, title, image, price, author_id, category_id):
+def create_book_logic(name, title,  price, author_id, category_id, image=None):
     book = Book.objects.create(
         name=name, title=title, image=image,
         price=price, author_id=author_id, category_id=category_id
