@@ -7,8 +7,10 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from .services import create_book_logic
 from .services import enrich_books_data
 from drf_spectacular.utils import extend_schema
-
+from account.permissions import *
+from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework import serializers
+
 # class BookAPI(ListCreateAPIView):
 #     queryset = Book.objects.all()
 #     serializer_class = BookSerializer
@@ -17,6 +19,10 @@ from rest_framework import serializers
 class BookListAPI(ListCreateAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+    permission_classes = [IsAdminOrReadOnly]
+    authentication_classes = [JWTAuthentication]
+
+
     parser_classes = (MultiPartParser, FormParser)
 
 

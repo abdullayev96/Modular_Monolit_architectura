@@ -1,0 +1,81 @@
+2026-01-27 16:05:36,822 - ERROR - Internal Server Error: /swagger/
+Traceback (most recent call last):
+  File "D:\Project_Bot\Modular_monolith\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\Project_Bot\Modular_monolith\venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Project_Bot\Modular_monolith\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\Project_Bot\Modular_monolith\venv\Lib\site-packages\django\views\generic\base.py", line 106, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Project_Bot\Modular_monolith\venv\Lib\site-packages\rest_framework\views.py", line 498, in dispatch
+    request = self.initialize_request(request, *args, **kwargs)
+  File "D:\Project_Bot\Modular_monolith\venv\Lib\site-packages\rest_framework\views.py", line 400, in initialize_request
+    authenticators=self.get_authenticators(),
+                   ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Project_Bot\Modular_monolith\venv\Lib\site-packages\rest_framework\views.py", line 278, in get_authenticators
+    return [auth() for auth in self.authentication_classes]
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'type' object is not iterable
+2026-01-27 16:05:36,877 - WARNING - Not Found: /favicon.ico
+2026-01-27 16:05:48,318 - ERROR - Internal Server Error: /swagger/
+Traceback (most recent call last):
+  File "D:\Project_Bot\Modular_monolith\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\Project_Bot\Modular_monolith\venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Project_Bot\Modular_monolith\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\Project_Bot\Modular_monolith\venv\Lib\site-packages\django\views\generic\base.py", line 106, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Project_Bot\Modular_monolith\venv\Lib\site-packages\rest_framework\views.py", line 498, in dispatch
+    request = self.initialize_request(request, *args, **kwargs)
+  File "D:\Project_Bot\Modular_monolith\venv\Lib\site-packages\rest_framework\views.py", line 400, in initialize_request
+    authenticators=self.get_authenticators(),
+                   ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Project_Bot\Modular_monolith\venv\Lib\site-packages\rest_framework\views.py", line 278, in get_authenticators
+    return [auth() for auth in self.authentication_classes]
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'type' object is not iterable
+2026-01-27 16:33:53,283 - ERROR - Internal Server Error: /swagger/
+Traceback (most recent call last):
+  File "D:\Project_Bot\Modular_monolith\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\Project_Bot\Modular_monolith\venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Project_Bot\Modular_monolith\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "D:\Project_Bot\Modular_monolith\venv\Lib\site-packages\django\views\generic\base.py", line 106, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Project_Bot\Modular_monolith\venv\Lib\site-packages\rest_framework\views.py", line 498, in dispatch
+    request = self.initialize_request(request, *args, **kwargs)
+  File "D:\Project_Bot\Modular_monolith\venv\Lib\site-packages\rest_framework\views.py", line 400, in initialize_request
+    authenticators=self.get_authenticators(),
+                   ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Project_Bot\Modular_monolith\venv\Lib\site-packages\rest_framework\views.py", line 278, in get_authenticators
+    return [auth() for auth in self.authentication_classes]
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'type' object is not iterable
+2026-01-27 16:36:19,149 - INFO - D:\Project_Bot\Modular_monolith\conf\settings.py changed, reloading.
+2026-01-27 16:46:31,361 - INFO - User logged in: book1@gmail.com
+2026-01-27 16:48:53,443 - INFO - D:\Project_Bot\Modular_monolith\author\views.py changed, reloading.
+2026-01-27 16:50:19,694 - INFO - D:\Project_Bot\Modular_monolith\author\views.py changed, reloading.
+2026-01-27 16:51:30,914 - WARNING - Bad Request: /api/authors
+2026-01-27 16:54:34,616 - INFO - D:\Project_Bot\Modular_monolith\account\permissions.py changed, reloading.
+2026-01-27 16:56:27,251 - INFO - D:\Project_Bot\Modular_monolith\author\views.py changed, reloading.
+2026-01-27 16:57:19,986 - WARNING - Unauthorized: /api/authors
+2026-01-27 16:58:04,588 - INFO - User logged in: book@gmail.com
+2026-01-27 17:00:34,996 - INFO - D:\Project_Bot\Modular_monolith\category\views.py changed, reloading.
+2026-01-27 17:01:19,983 - INFO - User logged in: book1@gmail.com
+2026-01-27 17:02:07,309 - WARNING - Forbidden: /api/authors
+2026-01-27 17:03:00,952 - WARNING - Forbidden: /api/category
+2026-01-27 17:04:49,044 - INFO - D:\Project_Bot\Modular_monolith\book\views.py changed, reloading.
+2026-01-27 17:11:57,621 - INFO - D:\Project_Bot\Modular_monolith\conf\urls.py changed, reloading.
+2026-01-27 17:20:52,973 - INFO - D:\Project_Bot\Modular_monolith\profiles\service.py changed, reloading.
+2026-01-27 17:39:51,326 - INFO - D:\Project_Bot\Modular_monolith\conf\urls.py changed, reloading.
+2026-01-27 17:40:49,158 - WARNING - Bad Request: /api/account/login/
+2026-01-27 17:41:01,422 - WARNING - Bad Request: /api/account/login/
+2026-01-27 17:41:35,399 - WARNING - Bad Request: /api/account/login/
