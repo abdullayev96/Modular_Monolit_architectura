@@ -1,17 +1,31 @@
-from django.db import IntegrityError
+from django.db import transaction
+from django.shortcuts import get_object_or_404
 from .models import Profile
 
-def create_user_profile(user_id: int):
 
-    try:
-        profile = Profile.objects.create(user_id=user_id)
-        return profile
-    except IntegrityError:
-        # Agar ushbu user_id uchun profil allaqachon mavjud bo'lsa
-        return None
+class ProfileService:
+    @staticmethod
+    @transaction.atomic
+    def update_account_data(user, account_data: dict):
+        if not account_data:
+            return user
+
+        # Username va Emailni yangilash
+        if 'username' in account_data:
+            user.username = account_data['username']
+
+        if 'email' in account_data:
+            user.email = account_data['email']
+
+        # Parolni xavfsiz yangilash (hash qilish)
+        password = account_data.get('password')
+        if password:
+            user.set_password(password)
+
+        user.save()
+        return user
 
 def update_balance(user_id: int, amount: float):
-    """Foydalanuvchi balansini o'zgartirish servisi."""
     profile = Profile.objects.get(user_id=user_id)
     profile.balance += amount
     profile.save()

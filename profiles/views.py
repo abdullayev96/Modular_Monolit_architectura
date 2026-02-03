@@ -11,55 +11,46 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.shortcuts import get_object_or_404
 from .models import Profile
-from .serializers import ProfileSerializer, UserSerializer
-from account.permissions import *
+from .serializers import UserSerializer, ProfileSerializer
+from .service import ProfileService
 
 
 class ProfileAPI(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
-    authentication_classes = [JWTAuthentication]
 
-    def get_queryset(self):
-        user = self.request.user
-        if user.role in ['admin', 'superadmin']:
-            return Profile.objects.all()
-        return Profile.objects.filter(user_id=user.id)
-
-    @action(detail=False, methods=['get', 'patch'], permission_classes=[IsAuthenticated])
+    @action(detail=False, methods=['get', 'patch'], url_path='me')
     def me(self, request):
         user = request.user
-        profile = get_object_or_404(Profile, user_id=user.id)
 
+        # 1. GET: Joriy ma'lumotlarni ko'rish
         if request.method == 'GET':
             return Response({
-                "account": UserSerializer(user).data,
-                "profile": ProfileSerializer(profile).data
+                "id": user.id,
+                "username": user.username,
+                "email": user.email
             })
 
+        # 2. PATCH: Faqat username, email, password o'zgartirish
         account_data = request.data.get('account')
-        if account_data:
-            user_serializer = UserSerializer(user, data=account_data, partial=True)
-            user_serializer.is_valid(raise_exception=True)
-            user_serializer.save()
+        if not account_data:
+            return Response({"error": "Ma'lumotlar 'account' kaliti ichida yuborilishi kerak"},
+                            status=status.HTTP_400_BAD_REQUEST)
 
-        profile_data = request.data.get('profile')
-        if profile_data:
-            # Xavfsizlik uchun balansni tahrirlashni taqiqlaymiz
-            profile_data.pop('balance', None)
-            profile_serializer = ProfileSerializer(profile, data=profile_data, partial=True)
-            profile_serializer.is_valid(raise_exception=True)
-            profile_serializer.save()
+        # Serializer orqali validatsiya (email/username bandligini tekshiradi)
+        serializer = UserSerializer(user, data=account_data, partial=True)
+        serializer.is_valid(raise_exception=True)
 
-        return Response({"message": "Ma'lumotlar muvaffaqiyatli yangilandi"})
+        # Servis orqali bazaga saqlash
+        updated_user = ProfileService.update_account_data(user, serializer.validated_data)
 
-    def get_permissions(self):
-        # Action-larga qarab permissionlarni taqsimlash
-        if self.action == 'create':
-            return [AllowAny()]
-        if self.action in ['list', 'destroy']:
-            return [IsOwnerOrAdmin()]
-        return [IsAuthenticated()]
+        return Response({
+            "message": "Ma'lumotlar muvaffaqiyatli yangilandi",
+            "account": {
+                "username": updated_user.username,
+                "email": updated_user.email
+            }
+        }, status=status.HTTP_200_OK)
 
 
 
